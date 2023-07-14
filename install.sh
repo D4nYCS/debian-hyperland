@@ -16,9 +16,9 @@ apt upgrade -y
 apt install nala -y
 
 # Installing Essential Programs 
-nala install kitty thunar unzip wget xorgrdp -y
+nala install kitty thunar unzip wget -y
 # Installing Other less important Programs
-nala install lightdm xrdp kde-plasma-desktop -y
+nala install lightdm xrdp kde-plasma-desktop tmux -y
 
 # Install chrome-browser
 nala install apt-transport-https curl -y
@@ -31,6 +31,14 @@ nala install google-chrome-stable -y
 systemctl enable lightdm
 systemctl set-default graphical.target
 systemctl enable xrdp
+
+# System Policy Prevents Popup fix
+echo "[Network Manager all Users]" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
+echo "Identity=unix-user:*" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
+echo "Action=org.freedesktop.NetworkManager.settings.modify.system;org.freedesktop.NetworkManager.network-control" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
+echo "ResultAny=no" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
+echo "ResultInactive=no" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
+echo "ResultActive=yes" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
 
 # Use nala
 bash scripts/usenala
