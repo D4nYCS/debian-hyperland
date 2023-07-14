@@ -13,7 +13,7 @@ Use the following Debian ISO as the base <https://cdimage.debian.org/cdimage/wee
 
 ```
 git clone https://github.com/D4nYCS/debian-roll
-cd debian-titus
+cd debian-roll
 sudo ./install.sh
 ```
 
