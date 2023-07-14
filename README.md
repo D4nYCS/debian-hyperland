@@ -1,5 +1,5 @@
-# Debian-titus
-Debian customizations from Chris Titus Tech
+# debian-roll
+Debian customizations from Dany
  
 ## Requirements
 _This install changes Debian to the SID (Dev) Branch_
@@ -12,7 +12,7 @@ Use the following Debian ISO as the base <https://cdimage.debian.org/cdimage/wee
 ### To install:
 
 ```
-git clone https://github.com/ChrisTitusTech/debian-titus
+git clone https://github.com/D4nYCS/debian-roll
 cd debian-titus
 sudo ./install.sh
 ```
