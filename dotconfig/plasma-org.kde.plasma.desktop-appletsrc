@@ -34,22 +34,26 @@ plugin=org.kde.plasma.digitalclock
 immutability=1
 plugin=org.kde.plasma.showdesktop
 
-[Containments][2][Applets][3]
+[Containments][2][Applets][22]
 immutability=1
-plugin=org.kde.plasma.kickoff
+plugin=org.kde.plasma.kicker
 
-[Containments][2][Applets][3][Configuration]
+[Containments][2][Applets][22][Configuration]
 PreloadWeight=100
 popupHeight=514
 popupWidth=651
 
-[Containments][2][Applets][3][Configuration][General]
+[Containments][2][Applets][22][Configuration][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
+[Containments][2][Applets][22][Configuration][General]
 favoritesPortedToKAstats=true
 
-[Containments][2][Applets][3][Configuration][Shortcuts]
+[Containments][2][Applets][22][Configuration][Shortcuts]
 global=Alt+F1
 
-[Containments][2][Applets][3][Shortcuts]
+[Containments][2][Applets][22][Shortcuts]
 global=Alt+F1
 
 [Containments][2][Applets][4]
@@ -61,7 +65,7 @@ immutability=1
 plugin=org.kde.plasma.icontasks
 
 [Containments][2][Applets][5][Configuration][General]
-launchers=applications:systemsettings.desktop,applications:org.kde.discover.desktop,preferred://filemanager
+launchers=applications:systemsettings.desktop,preferred://filemanager,applications:org.kde.konsole.desktop,applications:org.kde.kate.desktop,applications:google-chrome.desktop
 
 [Containments][2][Applets][6]
 immutability=1
@@ -76,7 +80,7 @@ PreloadWeight=55
 SystrayContainmentId=8
 
 [Containments][2][General]
-AppletOrder=3;4;5;6;7;18;19
+AppletOrder=22;4;5;6;7;18;19
 
 [Containments][8]
 activityId=
@@ -140,3 +144,4 @@ knownItems=org.kde.plasma.manage-inputmethod,org.kde.plasma.devicenotifier,org.k
 
 [ScreenMapping]
 itemsOnDisabledScreens=
+screenMapping=desktop:/thinclient_drives,0,167051b5-74bb-4756-89d2-f79ddb0e5d4e
