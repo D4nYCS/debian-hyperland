@@ -1,4 +1,4 @@
-# Debian-To-Proxmox
+# Debian-Roll
 Debian customizations from Dany
  
 ## Requirements
@@ -12,8 +12,8 @@ Use the following Debian ISO as the base <https://cdimage.debian.org/cdimage/wee
 ### To install:
 
 ```
-git clone https://github.com/D4nYCS/debian-to-proxmox
-cd debian-to-proxmox
+git clone https://github.com/D4nYCS/debian-roll
+cd debian-roll
 sudo ./install.sh
 ```
 
