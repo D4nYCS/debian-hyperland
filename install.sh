@@ -24,10 +24,10 @@ mkdir -p /home/$username/hyprland
 cd /home/$username/hyprland
 wget https://github.com/hyprwm/Hyprland/releases/download/v0.28.0/source-v0.28.0.tar.gz
 tar -xvf source-v0.28.0.tar.gz
-wget https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/1.31/downloads/wayland-protocols-1.32.tar.xz
+wget https://gitlab.freedesktop.org/wayland/wayland-protocols/-/releases/1.32/downloads/wayland-protocols-1.32.tar.xz
 tar -xvJf wayland-protocols-1.32.tar.xz
 wget https://gitlab.freedesktop.org/wayland/wayland/-/releases/1.22.0/downloads/wayland-1.22.0.tar.xz
-tar -xzvJf wayland-1.22.0.tar.xz
+tar -xvJf wayland-1.22.0.tar.xz
 wget https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/0.1.1/downloads/libdisplay-info-0.1.1.tar.xz
 tar -xvJf libdisplay-info-0.1.1.tar.xz
 git clone https://gitlab.freedesktop.org/emersion/libliftoff.git
@@ -36,7 +36,7 @@ git clone https://gitlab.freedesktop.org/libinput/libinput.git
 cd wayland-1.22.0
 mkdir build &&
 cd    build &&
-eson setup ..            \
+meson setup ..            \
       --prefix=/usr       \
       --buildtype=release \
       -Ddocumentation=false &&
@@ -44,7 +44,7 @@ ninja
 ninja install
 cd ../..
 
-cd wayland-protocols-1.31
+cd wayland-protocols-1.32
 
 mkdir build &&
 cd    build &&
@@ -56,6 +56,38 @@ ninja install
 
 cd ../..
 
+cd libdisplay-info-0.1.1/
+
+mkdir build &&
+cd    build &&
+
+meson setup --prefix=/usr --buildtype=release &&
+ninja
+
+sudo ninja install
+
+cd ../..
+
+cd libliftoff/
+
+meson build/
+ninja -C build/
+
+cd build
+ninja install
+
+cd ../..
+
+cd libinput/
+
+ln -s /usr/include/locale.h /usr/include/xlocale.h
+
+meson setup --prefix=/usr build/
+ninja -C build/
+ninja -C build/ install
+
+cd ..
+
 chmod a+rw hyprland-source
 cd hyprland-source/
 
@@ -63,7 +95,7 @@ sed -i 's/\/usr\/local/\/usr/g' config.mk
 make install
 
 mkdir /usr/share/wayland-sessions
-cp -r /home/$username/hyprland/hypr-v0.28.0/hyprland-source/example/hyprland.desktop /usr/share/wayland-sessions/
+cp -r /home/$username/hyprland/hyprland-source/example/hyprland.desktop /usr/share/wayland-sessions/
 
 # Install brave-browser
 nala install apt-transport-https curl -y
