@@ -17,7 +17,7 @@ apt upgrade -y
 apt install nala -y
 
 # Installing Essential Programs 
-nala install -y meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev  vulkan-validationlayers-dev libvkfft-dev libgulkan-dev libegl-dev libgles2 libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev libpango1.0-dev xdg-desktop-portal-wlr hwdata check libgtk-3-dev libsystemd-dev xwayland kitty
+nala install -y meson wget build-essential ninja-build cmake-extras cmake gettext gettext-base fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev libxkbcommon-x11-dev libxkbregistry-dev libxkbcommon-dev libpixman-1-dev libudev-dev libseat-dev seatd libxcb-dri3-dev libvulkan-dev libvulkan-volk-dev  vulkan-validationlayers-dev libvkfft-dev libgulkan-dev libegl-dev libgles2 libegl1-mesa-dev glslang-tools libinput-bin libinput-dev libxcb-composite0-dev libavutil-dev libavcodec-dev libavformat-dev libxcb-ewmh2 libxcb-ewmh-dev libxcb-present-dev libxcb-icccm4-dev libxcb-render-util0-dev libxcb-res0-dev libxcb-xinput-dev libpango1.0-dev xdg-desktop-portal-wlr hwdata check libgtk-3-dev libsystemd-dev xwayland kitty libgbm-dev 
 
 #Create Directory, download source and excract 
 mkdir -p /home/$username/hyprland
@@ -62,25 +62,15 @@ cd hyprland-source/
 sed -i 's/\/usr\/local/\/usr/g' config.mk
 make install
 
-# Install chrome-browser
+mkdir /usr/share/wayland-sessions
+cp -r /home/$username/hyprland/hypr-v0.28.0/hyprland-source/example/hyprland.desktop /usr/share/wayland-sessions/
+
+# Install brave-browser
 nala install apt-transport-https curl -y
-curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome.gpg >> /dev/null
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
 nala update
-nala install google-chrome-stable -y
-
-# Enable graphical login, change target from CLI to GUI and Remote Login
-systemctl enable lightdm
-systemctl set-default graphical.target
-systemctl enable xrdp
-
-# System Policy Prevents Popup fix
-echo "[Network Manager all Users]" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
-echo "Identity=unix-user:*" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
-echo "Action=org.freedesktop.NetworkManager.settings.modify.system;org.freedesktop.NetworkManager.network-control" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
-echo "ResultAny=no" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
-echo "ResultInactive=no" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
-echo "ResultActive=yes" >> /etc/polkit-1/localauthority/50-local.d/50-allow-network-manager.pkla
+nala install brave-browser -y
 
 # Use nala
 bash scripts/usenala
