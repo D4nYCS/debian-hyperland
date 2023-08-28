@@ -1,4 +1,4 @@
-# Debian-Roll
+# Debian-Hyperland
 Debian customizations from Dany
  
 ## Requirements
@@ -12,8 +12,8 @@ Use the following Debian ISO as the base <https://cdimage.debian.org/cdimage/wee
 ### To install:
 
 ```
-git clone https://github.com/D4nYCS/debian-roll
-cd debian-roll
+git clone https://github.com/D4nYCS/debian-hyperland
+cd debian-hyperland
 sudo ./install.sh
 ```
 
